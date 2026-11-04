@@ -44,7 +44,7 @@
             position: fixed;
             width: 350px;
             height: 350px;
-            background: radial-gradient(circle, rgba(249, 80, 84, 0.1) 0%, rgba(26, 79, 176, 0.04) 50%, transparent 80%);
+            background: radial-gradient(circle, rgba(249, 80, 84, 0.12) 0%, rgba(26, 79, 176, 0.04) 50%, transparent 80%);
             border-radius: 50%;
             pointer-events: none;
             transform: translate(-50%, -50%);
@@ -68,7 +68,7 @@
             100% { transform: translate(30px, 30px); }
         }
 
-        /* KANVAS JARINGAN TEKNOLOGI (CONSTELLATION BACKGROUND) */
+        /* KANVAS JARINGAN KONSTELASI */
         #bgCanvas {
             position: fixed;
             top: 0;
@@ -86,7 +86,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 8%;
-            background-color: rgba(19, 21, 28, 0.75);
+            background-color: rgba(19, 21, 28, 0.8);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             border-bottom: 1px solid rgba(255,255,255,0.05);
@@ -193,7 +193,7 @@
         }
 
         .hero-desc {
-            color: #a0aabf;
+            color: #c9d1e1;
             font-size: 17px;
             margin-bottom: 35px;
             max-width: 95%;
@@ -222,7 +222,15 @@
             transition: all 0.3s ease;
             border: 2px solid #f95054;
             cursor: pointer;
-            box-shadow: 0 10px 20px rgba(249, 80, 84, 0.2);
+            box-shadow: 0 10px 20px rgba(249, 80, 84, 0.25);
+        }
+
+        .btn-primary svg {
+            transition: transform 0.3s ease;
+        }
+
+        .btn-primary:hover svg {
+            transform: translateY(4px);
         }
 
         .btn-primary:hover {
@@ -244,7 +252,7 @@
             object-fit: cover;
             border-radius: 50%;
             border: 10px solid rgba(35, 40, 54, 0.5);
-            box-shadow: 0 0 50px rgba(249, 80, 84, 0.2);
+            box-shadow: 0 0 50px rgba(249, 80, 84, 0.25);
             animation: float 5s ease-in-out infinite; 
         }
 
@@ -318,15 +326,15 @@
             flex-direction: column;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transition: all 0.4s ease;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             border: 1px solid rgba(255,255,255,0.03);
             backdrop-filter: blur(10px);
         }
 
         .project-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(249, 80, 84, 0.3);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(249, 80, 84, 0.1);
+            transform: translateY(-8px);
+            border-color: rgba(249, 80, 84, 0.4);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5), 0 0 25px rgba(249, 80, 84, 0.15);
         }
 
         .project-img-slot {
@@ -494,7 +502,7 @@
                 <span class="status-dot"></span> Available for Work
             </div>
             <h1 class="hero-title">Hello, Saya <br><span class="animated-name">Muhammad Danil</span></h1>
-            <p class="hero-desc" style="color: #c9d1e1;">
+            <p class="hero-desc">
                 Mahasiswa S1 Informatika di Universitas Muhammadiyah Cirebon. Saya memiliki minat besar dalam Web Development, analisis sistem, dan pengembangan perangkat lunak yang efisien serta *scalable*.
             </p>
             <div class="hero-btns">
@@ -739,16 +747,14 @@
         <p>Dirancang & Dibangun oleh <strong>Muhammad Danil</strong> &copy; 2026</p>
     </footer>
 
-    <!-- SCRIPT ANIMASI KONSTELASI JARINGAN TEKNOLOGI INTERAKTIF -->
+    <!-- SCRIPT KONSTELASI TEKNOLOGI & INTERAKSI -->
     <script>
-        // 1. Script Kursor Cahaya
         const cursorGlow = document.getElementById('cursorGlow');
         window.addEventListener('mousemove', (e) => {
             cursorGlow.style.left = e.clientX + 'px';
             cursorGlow.style.top = e.clientY + 'px';
         });
 
-        // 2. Script Scroll Reveal
         document.addEventListener("DOMContentLoaded", function() {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
@@ -762,14 +768,13 @@
             revealElements.forEach((el) => { observer.observe(el); });
         });
 
-        // 3. Script Konstelasi Partikel Jaringan (Tech Network Animation)
         const canvas = document.getElementById('bgCanvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
         let particlesArray = [];
-        let mouse = { x: null, y: null, radius: 150 };
+        let mouse = { x: null, y: null };
 
         window.addEventListener('mousemove', (event) => {
             mouse.x = event.clientX;
@@ -781,8 +786,6 @@
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
                 this.size = Math.random() * 2 + 1;
-                this.baseX = this.x;
-                this.baseY = this.y;
                 this.vx = (Math.random() - 0.5) * 0.8;
                 this.vy = (Math.random() - 0.5) * 0.8;
             }
@@ -794,7 +797,7 @@
                 if (this.y < 0 || this.y > canvas.height) this.vy = -this.vy;
             }
             draw() {
-                ctx.fillStyle = 'rgba(249, 80, 84, 0.5)';
+                ctx.fillStyle = 'rgba(249, 80, 84, 0.6)';
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.closePath();
@@ -804,7 +807,7 @@
 
         function initParticles() {
             particlesArray = [];
-            let numberOfParticles = (canvas.width * canvas.height) / 12000;
+            let numberOfParticles = (canvas.width * canvas.height) / 11000;
             for (let i = 0; i < numberOfParticles; i++) {
                 particlesArray.push(new Particle());
             }
@@ -812,14 +815,13 @@
         initParticles();
 
         function connectParticles() {
-            let opacityValue = 1;
             for (let a = 0; a < particlesArray.length; a++) {
                 for (let b = a + 1; b < particlesArray.length; b++) {
                     let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) +
                                  ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
                     if (distance < 12000) {
-                        opacityValue = 1 - (distance / 12000);
-                        ctx.strokeStyle = 'rgba(249, 80, 84,' + (opacityValue * 0.15) + ')';
+                        let opacityValue = 1 - (distance / 12000);
+                        ctx.strokeStyle = 'rgba(249, 80, 84,' + (opacityValue * 0.18) + ')';
                         ctx.lineWidth = 1;
                         ctx.beginPath();
                         ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
@@ -828,11 +830,10 @@
                     }
                 }
                 
-                // Menghubungkan partikel ke mouse
                 let mouseDist = ((particlesArray[a].x - mouse.x) * (particlesArray[a].x - mouse.x)) +
                               ((particlesArray[a].y - mouse.y) * (particlesArray[a].y - mouse.y));
-                if (mouseDist < 20000) {
-                    ctx.strokeStyle = 'rgba(0, 210, 255, 0.25)';
+                if (mouseDist < 18000) {
+                    ctx.strokeStyle = 'rgba(0, 210, 255, 0.3)';
                     ctx.lineWidth = 1;
                     ctx.beginPath();
                     ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
