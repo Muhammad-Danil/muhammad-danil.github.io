@@ -31,12 +31,26 @@
             line-height: 1.7;
             overflow-x: hidden;
             scroll-behavior: smooth;
+            cursor: default;
         }
 
         @keyframes gradientBG {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
+        }
+
+        /* EFEK KURSOR MOUSE BERCENGKRAMA (MOUSE GLOW) */
+        .cursor-glow {
+            position: fixed;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(249, 80, 84, 0.12) 0%, rgba(26, 79, 176, 0.05) 50%, transparent 80%);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            transition: width 0.3s, height 0.3s;
         }
 
         /* AMBIENT LIGHTING */
@@ -55,7 +69,7 @@
             100% { transform: translate(30px, 30px); }
         }
 
-        /* CANVAS BACKGROUND UNTUK EFEK PETASAN INTERAKTIF */
+        /* KANVAS LATAR BELAKANG PETASAN & BINTANG */
         #bgCanvas {
             position: fixed;
             top: 0;
@@ -63,7 +77,7 @@
             width: 100vw;
             height: 100vh;
             z-index: -2;
-            pointer-events: none; /* Agar tidak menghalangi klik ke tombol */
+            pointer-events: none;
         }
 
         a { text-decoration: none; color: inherit; }
@@ -73,7 +87,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 8%;
-            background-color: rgba(19, 21, 28, 0.7);
+            background-color: rgba(19, 21, 28, 0.75);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             border-bottom: 1px solid rgba(255,255,255,0.05);
@@ -182,9 +196,18 @@
         .hero-desc {
             color: #a0aabf;
             font-size: 17px;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             max-width: 95%;
             font-weight: 300;
+        }
+
+        /* TOMBOL AKSI GANDA (Primary & Secondary Outline) */
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 10;
         }
 
         .btn-primary {
@@ -194,7 +217,7 @@
             gap: 10px;
             background-color: #f95054;
             color: #fff;
-            padding: 14px 38px;
+            padding: 14px 32px;
             border-radius: 8px;
             font-weight: 600;
             font-size: 15px;
@@ -202,14 +225,35 @@
             border: 2px solid #f95054;
             cursor: pointer;
             box-shadow: 0 10px 20px rgba(249, 80, 84, 0.2);
-            position: relative;
-            z-index: 10;
         }
 
         .btn-primary:hover {
             background-color: transparent;
             color: #f95054;
             box-shadow: 0 0 25px rgba(249, 80, 84, 0.5);
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background-color: transparent;
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            border-color: #f95054;
+            color: #f95054;
+            background: rgba(249, 80, 84, 0.05);
             transform: translateY(-3px);
         }
 
@@ -424,6 +468,7 @@
             .animated-name { transform: translateX(0) scale(0.9); }
             @keyframes nameAppear { to { opacity: 1; transform: translateX(0) scale(1); } }
             .project-content { padding: 25px; }
+            .cursor-glow { display: none; } /* Nonaktifkan di mobile agar performa ringan */
         }
 
         @media (min-width: 900px) {
@@ -451,6 +496,9 @@
 </head>
 <body>
 
+    <!-- EFEK KURSOR CAHAYA -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
     <!-- KANVAS UNTUK EFEK PETASAN INTERAKTIF -->
     <canvas id="bgCanvas"></canvas>
 
@@ -476,13 +524,18 @@
             </div>
             <h1 class="hero-title">Hello, Saya <br><span class="animated-name">Muhammad Danil</span></h1>
             <p class="hero-desc" style="color: #c9d1e1;">
-                *Coba klik di mana saja pada layar untuk melihat keajaiban!* <br><br>
+                *Klik di mana saja pada layar untuk memicu kembang api!* <br><br>
                 Mahasiswa S1 Informatika di Universitas Muhammadiyah Cirebon. Saya memiliki minat besar dalam Web Development, analisis sistem, dan pengembangan perangkat lunak yang efisien serta *scalable*.
             </p>
-            <a href="#projects" class="btn-primary">
-                Lihat Karya Saya
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </a>
+            <div class="hero-btns">
+                <a href="#projects" class="btn-primary">
+                    Lihat Karya Saya
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+                <a href="mailto:md2843292@gmail.com" class="btn-secondary">
+                    Unduh CV / Kontak
+                </a>
+            </div>
         </div>
         <div class="hero-image">
             <img src="foto.jpg" alt="Muhammad Danil">
@@ -540,7 +593,7 @@
         
         <div class="project-card reveal">
             <div class="project-img-slot">
-                <img src="simkamas.jpeg" alt="Dashboard SIMKAMAS">
+                <img src="simkamas_2.jpeg" alt="Dashboard SIMKAMAS">
             </div>
             <div class="project-content">
                 <h3>SIMKAMAS (Sistem Manajemen Kegiatan Masyarakat)</h3>
@@ -566,7 +619,7 @@
 
         <div class="project-card reveal">
             <div class="project-img-slot">
-                <img src="laundry.jpeg" alt="Lavora Laundry">
+                <img src="laundry_2.jpeg" alt="Lavora Laundry">
             </div>
             <div class="project-content">
                 <h3>Sistem Manajemen Lavora Laundry</h3>
@@ -617,7 +670,7 @@
 
         <div class="project-card reveal">
             <div class="project-img-slot">
-                <img src="sekolahdasar.png" alt="SIAKAD Sekolah Dasar">
+                <img src="sekolahdasar.jpg" alt="SIAKAD Sekolah Dasar">
             </div>
             <div class="project-content">
                 <h3>SIAKAD (Sistem Informasi Akademik) SD</h3>
@@ -645,7 +698,7 @@
         
         <div class="project-card reveal">
             <div class="project-img-slot">
-                <img src="bps.jpeg" alt="Magang BPS Cirebon">
+                <img src="bps_2.jpeg" alt="Magang BPS Cirebon">
             </div>
             <div class="project-content">
                 <h3>Badan Pusat Statistik (BPS) Cirebon</h3>
@@ -662,7 +715,7 @@
 
         <div class="project-card reveal">
             <div class="project-img-slot">
-                <img src="kkm.jpeg" alt="Edukasi Keamanan Digital KKM">
+                <img src="kkm_2.jpeg" alt="Edukasi Keamanan Digital KKM">
             </div>
             <div class="project-content">
                 <h3>Kuliah Kerja Mahasiswa (KKM) 42</h3>
@@ -719,9 +772,16 @@
         <p>Dirancang & Dibangun oleh <strong>Muhammad Danil</strong> &copy; 2026</p>
     </footer>
 
-    <!-- SCRIPT ANIMASI SCROLL & EFEK PETASAN (FIREWORKS) -->
+    <!-- SCRIPT TAMBAHAN: MOUSE GLOW & FIREWORKS -->
     <script>
-        // 1. Script Scroll Reveal (Fade-in saat scroll)
+        // 1. Script Kursor Cahaya Mengikuti Mouse
+        const cursorGlow = document.getElementById('cursorGlow');
+        window.addEventListener('mousemove', (e) => {
+            cursorGlow.style.left = e.clientX + 'px';
+            cursorGlow.style.top = e.clientY + 'px';
+        });
+
+        // 2. Script Scroll Reveal
         document.addEventListener("DOMContentLoaded", function() {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
@@ -735,7 +795,7 @@
             revealElements.forEach((el) => { observer.observe(el); });
         });
 
-        // 2. Script Animasi Kanvas (Bintang & Petasan)
+        // 3. Script Animasi Kanvas (Bintang & Petasan)
         const canvas = document.getElementById('bgCanvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -749,31 +809,28 @@
                 this.x = x;
                 this.y = y;
                 this.isFirework = isFirework;
-                // Ukuran partikel petasan sedikit lebih besar dari bintang
                 this.size = Math.random() * (isFirework ? 4 : 2) + 1;
                 
-                // Kecepatan
                 if (isFirework) {
-                    this.speedX = (Math.random() - 0.5) * 15; // Ledakan melebar
-                    this.speedY = (Math.random() - 0.5) * 15;
+                    this.speedX = (Math.random() - 0.5) * 16;
+                    this.speedY = (Math.random() - 0.5) * 16;
                 } else {
-                    this.speedX = Math.random() * 1 - 0.5; // Bintang melayang santai
+                    this.speedX = Math.random() * 1 - 0.5;
                     this.speedY = Math.random() * 1 - 0.5;
                 }
                 
                 this.color = colors[Math.floor(Math.random() * colors.length)];
                 this.life = 1;
-                this.decay = Math.random() * 0.02 + 0.01; // Kecepatan memudar
+                this.decay = Math.random() * 0.02 + 0.012;
             }
             update() {
                 this.x += this.speedX;
                 this.y += this.speedY;
                 
                 if (this.isFirework) {
-                    this.speedY += 0.2; // Efek gravitasi jatuh ke bawah
-                    this.life -= this.decay; // Makin lama makin memudar
+                    this.speedY += 0.25; // gravitasi
+                    this.life -= this.decay;
                 } else {
-                    // Bintang mantul pelan kalau kena layar pinggir
                     if(this.x < 0 || this.x > canvas.width) this.speedX *= -1;
                     if(this.y < 0 || this.y > canvas.height) this.speedY *= -1;
                 }
@@ -791,35 +848,30 @@
             }
         }
 
-        // Bikin 50 bintang bercahaya saat awal web dibuka
-        for(let i=0; i<50; i++) {
+        // Bikin bintang awal
+        for(let i=0; i<55; i++) {
             particles.push(new Particle(Math.random()*canvas.width, Math.random()*canvas.height, false));
         }
 
-        // Event saat layar diklik (Ngeluarin Petasan!)
+        // Event Klik untuk Petasan
         window.addEventListener('click', (e) => {
-            // Mengeluarkan 40 partikel setiap kali klik
-            for(let i=0; i<40; i++){
+            for(let i=0; i<45; i++){
                 particles.push(new Particle(e.clientX, e.clientY, true));
             }
         });
 
-        // Responsif jika layar diubah ukurannya
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         });
 
-        // Looping animasi
         function animate() {
-            // Bikin background transparan dikit biar ada efek jejak (trail effect)
             ctx.fillStyle = 'rgba(26, 30, 41, 0.2)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
             for (let i = 0; i < particles.length; i++) {
                 particles[i].update();
                 particles[i].draw();
-                // Hapus partikel petasan kalau udah mati/hilang
                 if (particles[i].isFirework && particles[i].life <= 0) {
                     particles.splice(i, 1);
                     i--;
