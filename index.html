@@ -246,29 +246,40 @@
             border-right: 1px solid rgba(255,255,255,0.02);
         }
 
-        .project-card:hover {
-            transform: scale(1.01);
-        }
-
+        /* =========================================
+           PENGATURAN SLOT GAMBAR: MIRING & UTUH
+           ========================================= */
         .project-img-slot {
             width: 100%;
-            height: 250px;
-            background-color: #1a1e29;
+            height: 300px; /* Tinggi disesuaikan agar gambar bebas bergerak */
+            background-color: rgba(26, 30, 41, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px; /* Memberi ruang di sekitar gambar agar tidak terpotong tepi */
             position: relative;
-            overflow: hidden;
+            perspective: 1200px; /* Sangat penting untuk efek miring 3D */
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         
         .project-img-slot img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: top;
-            transition: transform 0.5s;
+            height: auto;
+            max-height: 100%;
+            object-fit: contain; /* Memastikan foto kelihatan semua (tidak di-crop) */
+            border-radius: 8px;
+            /* Efek Miring 3D (Isometric) */
+            transform: rotateY(20deg) rotateX(5deg) rotateZ(-2deg) scale(0.95); 
+            box-shadow: -15px 15px 25px rgba(0,0,0,0.4);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
+        /* Saat di-hover, gambar akan meluruskan diri dan sedikit zoom */
         .project-card:hover .project-img-slot img {
-            transform: scale(1.05); 
+            transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg) scale(1.05); 
+            box-shadow: 0 15px 30px rgba(249, 80, 84, 0.15);
         }
+        /* ========================================= */
 
         .project-content {
             padding: 30px;
@@ -377,9 +388,9 @@
                 flex-direction: row;
             }
             .project-img-slot {
-                width: 350px;
+                width: 400px; /* Melebarkan area gambar di PC agar leluasa miring */
                 height: auto;
-                min-height: 100%;
+                min-height: 350px;
                 border-bottom: none;
                 border-right: 1px solid rgba(255,255,255,0.05);
             }
@@ -414,7 +425,6 @@
         <div class="hero-content">
             <span class="welcome-text">Welcome!</span>
             
-            <!-- NAMA DENGAN EFEK ANIMASI BERGERAK -->
             <h1 class="hero-title">Saya <br><span class="animated-name">Muhammad Danil</span></h1>
             
             <p class="hero-desc">
@@ -481,7 +491,6 @@
         <!-- PROYEK 1: SIMKAMAS -->
         <div class="project-card reveal">
             <div class="project-img-slot">
-                <!-- Diperbarui dengan simkamas_2.jpeg -->
                 <img src="simkamas_2.jpeg" alt="Dashboard SIMKAMAS">
             </div>
             <div class="project-content">
@@ -508,7 +517,6 @@
         <!-- PROYEK 2: Laundry -->
         <div class="project-card reveal">
             <div class="project-img-slot">
-                <!-- Diperbarui dengan laundry_2.jpeg -->
                 <img src="laundry_2.jpeg" alt="Lavora Laundry">
             </div>
             <div class="project-content">
@@ -536,7 +544,6 @@
         <!-- PROYEK 3: Infokus -->
         <div class="project-card reveal">
             <div class="project-img-slot">
-                <!-- Diperbarui dengan infokus.jpg -->
                 <img src="infokus.jpg" alt="Sistem Peminjaman Infokus">
             </div>
             <div class="project-content">
@@ -563,7 +570,6 @@
         <!-- PROYEK 4: SIAKAD SD -->
         <div class="project-card reveal">
             <div class="project-img-slot">
-                <!-- Diperbarui dengan sekolahdasar.jpg -->
                 <img src="sekolahdasar.jpg" alt="SIAKAD Sekolah Dasar">
             </div>
             <div class="project-content">
@@ -592,7 +598,6 @@
         <!-- PENGALAMAN 1: Magang BPS -->
         <div class="project-card reveal">
             <div class="project-img-slot">
-                <!-- Diperbarui dengan bps_2.jpeg -->
                 <img src="bps_2.jpeg" alt="Magang BPS Cirebon">
             </div>
             <div class="project-content">
@@ -606,7 +611,6 @@
         <!-- PENGALAMAN 2: KKM 42 -->
         <div class="project-card reveal">
             <div class="project-img-slot">
-                <!-- Diperbarui dengan kkm_2.jpeg -->
                 <img src="kkm_2.jpeg" alt="Edukasi Keamanan Digital KKM">
             </div>
             <div class="project-content">
@@ -652,7 +656,6 @@
             <p style="color: #a0aabf; margin-bottom: 30px; font-size: 16px;">
                 Tertarik untuk berdiskusi, berkolaborasi pada proyek inovatif, atau memiliki pertanyaan terkait pengembangan aplikasi? Jangan ragu untuk menghubungi saya!
             </p>
-            <!-- Tombol Email Profesional -->
             <a href="mailto:md2843292@gmail.com" class="btn-primary" style="font-size: 18px; padding: 15px 40px; display: inline-flex; align-items: center; gap: 10px;">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
